@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import TodoList from './TodoList';
+import './App.css';
+// material ui
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import TextField from 'material-ui/TextField';
 
 class TodoApp extends Component {
   // 一定要有一個 render 方法
@@ -23,11 +28,15 @@ class TodoApp extends Component {
     this.handleCompleteItem = this.handleCompleteItem.bind(this);
   }
   handleTodoChange(e) {
-    this.setState({
-      newTodoList: { id: this.state.index, data: e.target.value },
-    });
+    if (e.key === 'Enter'){
+      this.handleAddTodoList();
+    }else {
+      this.setState({
+        newTodoList: { id: this.state.index, data: e.target.value },
+      });
+    }
   }
-  handleAddTodoList() {
+  handleAddTodoList(event) {
     if (this.state.newTodoList.data !== '') {
       const lists = this.state.todoLists;
       lists.push({
@@ -136,32 +145,40 @@ class TodoApp extends Component {
   render() {
     // 回傳很像是 html 的 jsx
     return (
-      <div className="todoApp">
-        <h1>TodoApp</h1>
-        <input
+      <div className="App">
+        <div className="todoAppHeader">
+          <h1>TodoApp</h1>
+        </div>
+        <div className="cntItem">
+          <li>Active item: {this.state.cntTotalItem - this.state.cntComplete}</li>
+          <li>Completed item: {this.state.cntComplete}</li>
+        </div>
+        {/* <input
           type="text"
           value={this.state.newTodoList.data}
           onChange={this.handleTodoChange}
+        /> */}
+        <TextField
+          type="text"
+          hintText="Please enter your todo list name"
+          onChange={this.handleTodoChange}
+          onKeyPress={this.handleTodoChange}
+          value={this.state.newTodoList.data}
         />
-        <button
+        <FloatingActionButton 
+          onTouchTap={this.handleAddTodoList}
+        >
+          <ContentAdd />
+        </FloatingActionButton>
+        {/* <button
           id="app"
           onClick={this.handleAddTodoList}
         >Add TodoList</button>
+        */}
         <ul>
           {this.state.todoLists.map(list =>
             <div className="app" key={list.listId}>
-              {list.listId === this.state.changeListName &&
-                <li>
-                  <input
-                    type="text"
-                    onChange={this.handleChangeTodoListName}
-                  />
-                </li>
-              }
-              {list.listId !== this.state.changeListName &&
-                <li>{list.listName}</li>
-              }
-              <TodoList
+               <TodoList
                 list={list}
                 changeListName={this.state.changeListName}
                 parentHandleAddTodoItem={this.handleAddTodoItem}
@@ -169,12 +186,11 @@ class TodoApp extends Component {
                 handleDeleteList={this.handleDeleteList}
                 handleDeleteItem={this.handleDeleteItem}
                 handleCompleteItem={this.handleCompleteItem}
+                handleChangeTodoListName={this.handleChangeTodoListName}
               />
             </div>,
           )}
         </ul>
-        <li>Active item: {this.state.cntTotalItem - this.state.cntComplete}</li>
-        <li>Completed item: {this.state.cntComplete}</li>
 
       </div>
     );

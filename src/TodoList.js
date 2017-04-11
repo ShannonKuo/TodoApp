@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import TodoItem from './TodoItem';
+import './App.css';
+// material ui
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import FontIcon from 'material-ui/FontIcon';
+import TextField from 'material-ui/TextField';
 
 class TodoList extends Component {
   constructor() {
@@ -10,6 +16,7 @@ class TodoList extends Component {
     };
     this.handleTodoChange = this.handleTodoChange.bind(this);
     this.handleAddTodoItem = this.handleAddTodoItem.bind(this);
+    this.handlePressEnter = this.handlePressEnter.bind(this);
   }
   handleTodoChange(e) {
     this.setState({
@@ -24,21 +31,75 @@ class TodoList extends Component {
       this.setState({ newTodoItem: { data: '' } });
     }
   }
+  handlePressEnter(event, index, type) {
+    if (event.key === 'Enter' && type === 'add') {
+      this.handleAddTodoItem(event, index);
+    } else if (event.key === 'Enter' && type === 'edit') {
+      this.props.handleEditTodoListName(event, index);
+    }
+  }
   render() {
     const displayItem = this.props.list.items;
     const listId = this.props.list.listId;
     return (
-      <div>
-        <input
+      <div className="list">
+          {/*{this.props.list.listId !== this.props.changeListName &&
+            <ul>{this.props.list.listName}</ul>
+          }*/}
+          {this.props.changeListName !== listId &&
+            <li>
+              {this.props.list.listName}
+              <i
+                className="material-icons md-40"
+                onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
+              >edit 
+              </i>
+              <i
+                className="material-icons md-40"
+                onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
+              >delete
+              </i>
+            </li>
+          }
+          {this.props.changeListName === listId &&
+            <li>  
+              <TextField
+                hintText="edit your todo list name"
+                type="text"
+                onChange={(evt) => { this.props.handleChangeTodoListName(evt); }}
+                onKeyPress={(evt) => { this.handlePressEnter(evt, listId, 'edit'); }}
+              />
+              <i
+                className="material-icons md-40"
+                onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
+                >done
+              </i>
+              <i
+                className="material-icons md-40"
+                onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
+              >delete
+              </i>
+            </li>
+          }
+          {/* <input
           type="text"
           value={this.state.newTodoItem.data}
           onChange={this.handleTodoChange}
+          class="inline"
+        /> */}
+        <TextField
+          hintText="Please enter your todo item"
+          type="text"
+          value={this.state.newTodoItem.data}
+          onChange={this.handleTodoChange}
+          onKeyPress={(evt) => { this.handlePressEnter(evt, listId, 'add'); }}
         />
-        <button
+        {/* <button
           id="list"
           onClick={(evt) => { this.handleAddTodoItem(evt, listId); }}
         >Add todoItem
         </button>
+        
         {this.props.changeListName !== listId &&
           <button
             id="changeListName"
@@ -51,11 +112,18 @@ class TodoList extends Component {
             onClick={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
           >finish</button>
         }
-
         <button
           id={listId}
           onClick={(evt) => { this.props.handleDeleteList(evt, listId); }}
         >Delete</button>
+        */}
+        <FloatingActionButton
+          onTouchTap={(evt) => { this.handleAddTodoItem(evt, listId); }}
+        >
+          <ContentAdd /> 
+        </FloatingActionButton>
+         
+
         <ul>
           {displayItem.map(item =>
             <div className="list" key={item.id}>

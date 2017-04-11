@@ -1,0 +1,21 @@
+.todoAppHeader {
+  background-color: #EF9A9A;
+  text-align: center;
+  font-size: 1.5cm;
+  color: #FFFFFF;
+}
+
+.cntItem {
+  text-align: right;
+  font-size: 1cm;
+  color: #E57373;
+}
+
+.list {
+  font-size: 0.7cm;
+}
+
+.material-icons.md-40 {
+  font-size: 40px;
+  font-weight: normal;
+}
