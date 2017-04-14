@@ -47,38 +47,46 @@ class TodoList extends Component {
             <ul>{this.props.list.listName}</ul>
           }*/}
           {this.props.changeListName !== listId &&
-            <li>
-              {this.props.list.listName}
-              <i
-                className="material-icons md-40"
-                onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
-              >edit 
-              </i>
-              <i
-                className="material-icons md-40"
-                onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
-              >delete
-              </i>
-            </li>
+            <div>
+              <div className="listName">
+                {this.props.list.listName}
+              </div>
+              <div className="listIcon">
+                <i
+                  className="material-icons md-40"
+                  onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
+                >edit 
+                </i>
+                <i
+                  className="material-icons md-40"
+                  onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
+                >delete
+                </i>
+              </div>
+            </div>
           }
           {this.props.changeListName === listId &&
             <li>  
-              <TextField
-                hintText="edit your todo list name"
-                type="text"
-                onChange={(evt) => { this.props.handleChangeTodoListName(evt); }}
-                onKeyPress={(evt) => { this.handlePressEnter(evt, listId, 'edit'); }}
-              />
-              <i
-                className="material-icons md-40"
-                onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
-                >done
-              </i>
-              <i
-                className="material-icons md-40"
-                onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
-              >delete
-              </i>
+              <div className="listName">
+                <TextField
+                  hintText="edit your todo list name"
+                  type="text"
+                  onChange={(evt) => { this.props.handleChangeTodoListName(evt); }}
+                  onKeyPress={(evt) => { this.handlePressEnter(evt, listId, 'edit'); }}
+                />
+              </div> 
+              <div className="listIcon">
+                <i
+                  className="material-icons md-40"
+                  onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
+                  >done
+                </i>
+                <i
+                  className="material-icons md-40"
+                  onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
+                >delete
+                </i>
+              </div>
             </li>
           }
           {/* <input
@@ -87,42 +95,22 @@ class TodoList extends Component {
           onChange={this.handleTodoChange}
           class="inline"
         /> */}
-        <TextField
-          hintText="Please enter your todo item"
-          type="text"
-          value={this.state.newTodoItem.data}
-          onChange={this.handleTodoChange}
-          onKeyPress={(evt) => { this.handlePressEnter(evt, listId, 'add'); }}
-        />
-        {/* <button
-          id="list"
-          onClick={(evt) => { this.handleAddTodoItem(evt, listId); }}
-        >Add todoItem
-        </button>
-        
-        {this.props.changeListName !== listId &&
-          <button
-            id="changeListName"
-            onClick={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
-          >Edit</button>
-        }
-        {this.props.changeListName === listId &&
-          <button
-            id="changeListName"
-            onClick={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
-          >finish</button>
-        }
-        <button
-          id={listId}
-          onClick={(evt) => { this.props.handleDeleteList(evt, listId); }}
-        >Delete</button>
-        */}
-        <FloatingActionButton
-          onTouchTap={(evt) => { this.handleAddTodoItem(evt, listId); }}
-        >
-          <ContentAdd /> 
-        </FloatingActionButton>
-         
+        <div className="itemInput">
+          <TextField
+            hintText="Please enter your todo item"
+            type="text"
+            value={this.state.newTodoItem.data}
+            onChange={this.handleTodoChange}
+            onKeyPress={(evt) => { this.handlePressEnter(evt, listId, 'add'); }}
+          />
+          <FloatingActionButton
+            className="itemAdd"
+            mini={true}
+            onTouchTap={(evt) => { this.handleAddTodoItem(evt, listId); }}
+          >
+            <ContentAdd /> 
+          </FloatingActionButton>
+        </div>
 
         <ul>
           {displayItem.map(item =>

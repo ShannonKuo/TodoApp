@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import TodoList from './TodoList';
 import './App.css';
+
 // material ui
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from 'material-ui/TextField';
+import LinearProgress from 'material-ui/LinearProgress';
+  
 
-class TodoApp extends Component {
-  // 一定要有一個 render 方法
-  constructor() {
-    super();
-    this.state = {
+  class TodoApp extends Component {
+    // 一定要有一個 render 方法
+    constructor() {
+      super();
+      this.state = {
       todoLists: [],
       newTodoList: { id: '', data: '' },
       index: 0,
@@ -149,35 +152,33 @@ class TodoApp extends Component {
         <div className="todoAppHeader">
           <h1>TodoApp</h1>
         </div>
-        <div className="cntItem">
-          <li>Active item: {this.state.cntTotalItem - this.state.cntComplete}</li>
-          <li>Completed item: {this.state.cntComplete}</li>
-        </div>
-        {/* <input
-          type="text"
-          value={this.state.newTodoList.data}
-          onChange={this.handleTodoChange}
-        /> */}
-        <TextField
-          type="text"
-          hintText="Please enter your todo list name"
-          onChange={this.handleTodoChange}
-          onKeyPress={this.handleTodoChange}
-          value={this.state.newTodoList.data}
-        />
-        <FloatingActionButton 
-          onTouchTap={this.handleAddTodoList}
-        >
+        <div className="listInput">
+          <TextField
+            type="text"
+            hintText="Please enter your todo list name"
+            onChange={this.handleTodoChange}
+            onKeyPress={this.handleTodoChange}
+            value={this.state.newTodoList.data}
+          />
+          <FloatingActionButton 
+            onTouchTap={this.handleAddTodoList}
+          >
           <ContentAdd />
-        </FloatingActionButton>
-        {/* <button
-          id="app"
-          onClick={this.handleAddTodoList}
-        >Add TodoList</button>
-        */}
+          </FloatingActionButton>
+        </div>
+        <div className="cntItem">
+          <ul>Active item: {this.state.cntTotalItem - this.state.cntComplete}</ul>
+          <ul>Completed item: {this.state.cntComplete}</ul>
+        </div>
+        <LinearProgress
+          className="progress"
+          mode="determinate"
+          value={this.state.cntComplete / this.state.cntTotalItem * 100}
+        />
+
         <ul>
           {this.state.todoLists.map(list =>
-            <div className="app" key={list.listId}>
+            <div className="displayList" key={list.listId}>
                <TodoList
                 list={list}
                 changeListName={this.state.changeListName}

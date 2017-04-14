@@ -12,17 +12,19 @@ class TodoItem extends Component {
     super();
     this.state = { count: 0 };
   }
+
   render() {
     const item = this.props.item;
     const listId = this.props.listId;
     return (
-      <div>
+      <div className="item"> 
         <Checkbox
+          className="itemCheck"
           label={item.data}
           onCheck={(evt) => { this.props.handleCompleteItem(evt, listId, item.id); }}
         />
         <i
-          className="material-icons"
+          className="material-icons delete"
           onTouchTap={(evt) => { this.props.handleDeleteItem(evt, listId, item.id); }}
         >delete
         </i>

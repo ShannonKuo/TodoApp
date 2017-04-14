@@ -7,8 +7,13 @@
 
 .cntItem {
   text-align: right;
-  font-size: 1cm;
+  font-size: 0.4cm;
   color: #E57373;
+}
+
+.listInput {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .list {
@@ -18,4 +23,66 @@
 .material-icons.md-40 {
   font-size: 40px;
   font-weight: normal;
+}
+
+.listName {
+  float: left;
+  text-align: center;
+  //margin-left: 50px;
+  //margin-top: 30px;
+}
+
+.listIcon {
+  float: right;
+  //margin-top: 30px;
+  //margin-left: 30px;
+}
+
+.itemInput {
+  margin-top: 10px;
+}
+
+.itemAdd {
+  float: right;
+}
+
+.item {
+  padding-right: 80px;
+}
+
+.itemCheck {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.material-icons.delete {
+  float: right;
+}
+
+.displayList {
+  height: 350px;
+  width: 380px;
+  //background-color: #EF9A9A;
+  background-color: rgba(240,172,172,0.4);
+  //opacity: 0.5;
+  margin: 20px;
+  float: left;
+  color: #FFFFFF;
+  padding-top: 30px; 
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+}
+
+.blockList {
+  height: 350px;
+  width: 380px;
+  background-color: #EF9A9A;
+  opacity: 0.5;
+  margin: 20px;
+  float: left;
+  padding-top: 30px; 
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
 }
