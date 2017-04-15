@@ -1,18 +1,18 @@
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import React, { Component } from 'react';
 import TodoList from './TodoList';
 import './App.css';
 
 // material ui
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import TextField from 'material-ui/TextField';
-//import LinearProgress from 'material-ui/LinearProgress';
-  
+// import TextField from 'material-ui/TextField';
+// import LinearProgress from 'material-ui/LinearProgress';
+
 class TodoApp extends Component {
-    // 一定要有一個 render 方法
-    constructor() {
-      super();
-      this.state = {
+  // 一定要有一個 render 方法
+  constructor() {
+    super();
+    this.state = {
       todoLists: [],
       newTodoList: { id: '', data: '' },
       index: 0,
@@ -31,15 +31,15 @@ class TodoApp extends Component {
     this.handleProgressBar = this.handleProgressBar.bind(this);
   }
   handleTodoChange(e) {
-    if (e.key === 'Enter'){
+    if (e.key === 'Enter') {
       this.handleAddTodoList();
-    }else {
+    } else {
       this.setState({
         newTodoList: { id: this.state.index, data: e.target.value },
       });
     }
   }
-  handleAddTodoList(event) {
+  handleAddTodoList() {
     if (this.state.newTodoList.data !== '') {
       const lists = this.state.todoLists;
       lists.push({
@@ -100,7 +100,7 @@ class TodoApp extends Component {
         }
         this.setState({ cntComplete: this.state.cntComplete - cnt });
         this.setState({ cntTotalItem: this.state.cntTotalItem - cntDelete });
-        this.handleProgressBar( this.state.cntComplete - cnt, this.state.cntTotalItem - cntDelete);
+        this.handleProgressBar(this.state.cntComplete - cnt, this.state.cntTotalItem - cntDelete);
         const lists = this.state.todoLists;
         lists.splice(i, 1);
         this.setState({ todoLists: lists });
@@ -117,7 +117,7 @@ class TodoApp extends Component {
             let newComplete = this.state.cntComplete;
             if (newItems[j].complete === 1) {
               this.setState({ cntComplete: this.state.cntComplete - 1 });
-              newComplete = this.state.cntComplete -1;
+              newComplete = this.state.cntComplete - 1;
             }
             newItems.splice(j, 1);
             newTodoLists[i].items = newItems;
@@ -140,10 +140,10 @@ class TodoApp extends Component {
               newTodoLists[i].items[j].complete = 1;
               this.setState({ todoLists: newTodoLists });
               this.setState({ cntComplete: this.state.cntComplete + 1 });
-              this.handleProgressBar(this.state.cntComplete +1, this.state.cntTotalItem);
+              this.handleProgressBar(this.state.cntComplete + 1, this.state.cntTotalItem);
             } else if (itemComplete === 1) {
               this.setState({ cntComplete: this.state.cntComplete - 1 });
-              this.handleProgressBar(this.state.cntComplete -1, this.state.cntTotalItem);
+              this.handleProgressBar(this.state.cntComplete - 1, this.state.cntTotalItem);
               newTodoLists[i].items[j].complete = 0;
               this.setState({ todoLists: newTodoLists });
             }
@@ -154,9 +154,9 @@ class TodoApp extends Component {
   }
 
   handleProgressBar(complete, total) {
-    var elem = document.getElementById("myBar");
-    var width = complete / total * 100;
-    if (complete === 0 && total === 0){
+    const elem = document.getElementById('myBar');
+    let width = (complete / total) * 100;
+    if (complete === 0 && total === 0) {
       width = 1;
     }
     elem.style.width = width + '%';
@@ -170,7 +170,6 @@ class TodoApp extends Component {
           <h1>TodoApp</h1>
         </div>
         <div className="listInput">
-        {/*<TextField*/}
           <input
             type="text"
             hintText="Please enter your todo list name"
@@ -178,29 +177,23 @@ class TodoApp extends Component {
             onKeyPress={this.handleTodoChange}
             value={this.state.newTodoList.data}
           />
-          <FloatingActionButton 
+          <FloatingActionButton
             onTouchTap={this.handleAddTodoList}
           >
-          <ContentAdd />
+            <ContentAdd />
           </FloatingActionButton>
         </div>
         <div className="cntItem">
           <ul>Active item: {this.state.cntTotalItem - this.state.cntComplete}
               ;  Completed item: {this.state.cntComplete}</ul>
         </div>
-        {/*<LinearProgress
-          className="progress"
-          mode="determinate"
-          style={styles.block}
-          value={this.state.cntComplete / this.state.cntTotalItem * 100}
-        />*/}
         <div className="progressBar">
           <div id="myBar"></div>
         </div>
         <ul>
           {this.state.todoLists.map(list =>
             <div className="displayList" key={list.listId}>
-               <TodoList
+              <TodoList
                 list={list}
                 changeListName={this.state.changeListName}
                 parentHandleAddTodoItem={this.handleAddTodoItem}

@@ -11,7 +11,7 @@ const styles = {
   block: {
     maxWidth: 200,
   },
-}
+};
 
 class TodoItem extends Component {
   constructor() {
@@ -23,7 +23,7 @@ class TodoItem extends Component {
     const item = this.props.item;
     const listId = this.props.listId;
     return (
-      <div className="item"> 
+      <div className="item">
         <div>
           <Checkbox
             className="itemCheck"
