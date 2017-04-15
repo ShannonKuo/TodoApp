@@ -8,7 +8,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from 'material-ui/TextField';
 //import LinearProgress from 'material-ui/LinearProgress';
   
-
 class TodoApp extends Component {
     // 一定要有一個 render 方法
     constructor() {
@@ -171,7 +170,8 @@ class TodoApp extends Component {
           <h1>TodoApp</h1>
         </div>
         <div className="listInput">
-          <TextField
+        {/*<TextField*/}
+          <input
             type="text"
             hintText="Please enter your todo list name"
             onChange={this.handleTodoChange}
