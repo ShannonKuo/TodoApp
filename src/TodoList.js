@@ -5,6 +5,7 @@ import './App.css';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import FontIcon from 'material-ui/FontIcon';
+import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
 
 class TodoList extends Component {
@@ -38,6 +39,7 @@ class TodoList extends Component {
       this.props.handleEditTodoListName(event, index);
     }
   }
+
   render() {
     const displayItem = this.props.list.items;
     const listId = this.props.list.listId;
@@ -47,26 +49,27 @@ class TodoList extends Component {
             <ul>{this.props.list.listName}</ul>
           }*/}
           {this.props.changeListName !== listId &&
-            <div>
+            <ul>
               <div className="listName">
                 {this.props.list.listName}
-              </div>
-              <div className="listIcon">
-                <i
-                  className="material-icons md-40"
+                <IconButton
+                  iconClassName="material-icons md-40"
+                  tooltip="delete"
+                  onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
+                >
+                  delete
+                </IconButton>
+                <IconButton
+                  iconClassName="material-icons md-40"
+                  tooltip="edit"
                   onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
                 >edit 
-                </i>
-                <i
-                  className="material-icons md-40"
-                  onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
-                >delete
-                </i>
+                </IconButton>
               </div>
-            </div>
+            </ul>
           }
           {this.props.changeListName === listId &&
-            <li>  
+            <ul>  
               <div className="listName">
                 <TextField
                   hintText="edit your todo list name"
@@ -74,20 +77,20 @@ class TodoList extends Component {
                   onChange={(evt) => { this.props.handleChangeTodoListName(evt); }}
                   onKeyPress={(evt) => { this.handlePressEnter(evt, listId, 'edit'); }}
                 />
-              </div> 
-              <div className="listIcon">
-                <i
-                  className="material-icons md-40"
-                  onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
-                  >done
-                </i>
-                <i
-                  className="material-icons md-40"
+                <IconButton
+                  iconClassName="material-icons md-40"
+                  tooltip="delete"
                   onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
                 >delete
-                </i>
+                </IconButton>
+                <IconButton
+                  iconClassName="material-icons md-40"
+                  tooltip="done"
+                  onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
+                  >done
+                </IconButton>
               </div>
-            </li>
+            </ul>
           }
           {/* <input
           type="text"
@@ -112,7 +115,7 @@ class TodoList extends Component {
           </FloatingActionButton>
         </div>
 
-        <ul>
+        <ul className="displayItem">
           {displayItem.map(item =>
             <div className="list" key={item.id}>
               <TodoItem

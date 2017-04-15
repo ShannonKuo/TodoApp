@@ -6,10 +6,10 @@ import './App.css';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from 'material-ui/TextField';
-import LinearProgress from 'material-ui/LinearProgress';
+//import LinearProgress from 'material-ui/LinearProgress';
   
 
-  class TodoApp extends Component {
+class TodoApp extends Component {
     // 一定要有一個 render 方法
     constructor() {
       super();
@@ -29,6 +29,7 @@ import LinearProgress from 'material-ui/LinearProgress';
     this.handleDeleteList = this.handleDeleteList.bind(this);
     this.handleDeleteItem = this.handleDeleteItem.bind(this);
     this.handleCompleteItem = this.handleCompleteItem.bind(this);
+    this.handleProgressBar = this.handleProgressBar.bind(this);
   }
   handleTodoChange(e) {
     if (e.key === 'Enter'){
@@ -67,6 +68,7 @@ import LinearProgress from 'material-ui/LinearProgress';
       }
     }
     this.setState({ cntTotalItem: this.state.cntTotalItem + 1 });
+    this.handleProgressBar(this.state.cntComplete, this.state.cntTotalItem + 1);
   }
   handleEditTodoListName(event, listId) {
     if (this.state.changeListName === -1) {
@@ -99,6 +101,7 @@ import LinearProgress from 'material-ui/LinearProgress';
         }
         this.setState({ cntComplete: this.state.cntComplete - cnt });
         this.setState({ cntTotalItem: this.state.cntTotalItem - cntDelete });
+        this.handleProgressBar( this.state.cntComplete - cnt, this.state.cntTotalItem - cntDelete);
         const lists = this.state.todoLists;
         lists.splice(i, 1);
         this.setState({ todoLists: lists });
@@ -112,13 +115,16 @@ import LinearProgress from 'material-ui/LinearProgress';
           if (this.state.todoLists[i].items[j].id === itemId) {
             const newItems = this.state.todoLists[i].items;
             const newTodoLists = this.state.todoLists;
+            let newComplete = this.state.cntComplete;
             if (newItems[j].complete === 1) {
               this.setState({ cntComplete: this.state.cntComplete - 1 });
+              newComplete = this.state.cntComplete -1;
             }
             newItems.splice(j, 1);
             newTodoLists[i].items = newItems;
             this.setState({ todoLists: newTodoLists });
             this.setState({ cntTotalItem: this.state.cntTotalItem - 1 });
+            this.handleProgressBar(newComplete, this.state.cntTotalItem - 1);
           }
         }
       }
@@ -135,8 +141,10 @@ import LinearProgress from 'material-ui/LinearProgress';
               newTodoLists[i].items[j].complete = 1;
               this.setState({ todoLists: newTodoLists });
               this.setState({ cntComplete: this.state.cntComplete + 1 });
+              this.handleProgressBar(this.state.cntComplete +1, this.state.cntTotalItem);
             } else if (itemComplete === 1) {
               this.setState({ cntComplete: this.state.cntComplete - 1 });
+              this.handleProgressBar(this.state.cntComplete -1, this.state.cntTotalItem);
               newTodoLists[i].items[j].complete = 0;
               this.setState({ todoLists: newTodoLists });
             }
@@ -145,6 +153,16 @@ import LinearProgress from 'material-ui/LinearProgress';
       }
     }
   }
+
+  handleProgressBar(complete, total) {
+    var elem = document.getElementById("myBar");
+    var width = complete / total * 100;
+    if (complete === 0 && total === 0){
+      width = 1;
+    }
+    elem.style.width = width + '%';
+  }
+
   render() {
     // 回傳很像是 html 的 jsx
     return (
@@ -167,15 +185,18 @@ import LinearProgress from 'material-ui/LinearProgress';
           </FloatingActionButton>
         </div>
         <div className="cntItem">
-          <ul>Active item: {this.state.cntTotalItem - this.state.cntComplete}</ul>
-          <ul>Completed item: {this.state.cntComplete}</ul>
+          <ul>Active item: {this.state.cntTotalItem - this.state.cntComplete}
+              ;  Completed item: {this.state.cntComplete}</ul>
         </div>
-        <LinearProgress
+        {/*<LinearProgress
           className="progress"
           mode="determinate"
+          style={styles.block}
           value={this.state.cntComplete / this.state.cntTotalItem * 100}
-        />
-
+        />*/}
+        <div className="progressBar">
+          <div id="myBar"></div>
+        </div>
         <ul>
           {this.state.todoLists.map(list =>
             <div className="displayList" key={list.listId}>
@@ -192,7 +213,6 @@ import LinearProgress from 'material-ui/LinearProgress';
             </div>,
           )}
         </ul>
-
       </div>
     );
   }

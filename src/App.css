@@ -1,45 +1,50 @@
 .todoAppHeader {
-  background-color: #EF9A9A;
+  background-color: rgba(90,90,90,0.6);
   text-align: center;
   font-size: 1.5cm;
-  color: #FFFFFF;
 }
 
 .cntItem {
   text-align: right;
+  margin-right: 75px;
   font-size: 0.4cm;
-  color: #E57373;
+  color: #424242;
+}
+
+.progressBar {
+  width: 90%;
+  margin-left: 4.5%;
+  background-color: rgba(90,90,90,1);
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: #000000;
 }
 
 .listInput {
   text-align: center;
   margin-bottom: 20px;
+  margin-top: -30px;
 }
 
 .list {
   font-size: 0.7cm;
 }
 
-.material-icons.md-40 {
-  font-size: 40px;
+.material-ui.md-40 {
   font-weight: normal;
 }
 
 .listName {
-  float: left;
-  text-align: center;
-  //margin-left: 50px;
-  //margin-top: 30px;
-}
-
-.listIcon {
-  float: right;
-  //margin-top: 30px;
-  //margin-left: 30px;
+  margin-left: -20px;
 }
 
 .itemInput {
   margin-top: 10px;
+  margin-left: 18px;
+  margin-right: 10px;
 }
 
 .itemAdd {
@@ -47,42 +52,55 @@
 }
 
 .item {
-  padding-right: 80px;
+  padding-right: 20px;
 }
 
 .itemCheck {
   margin-top: 10px;
-  margin-left: 10px;
 }
 
-.material-icons.delete {
+.itemDelete {
   float: right;
+  margin-top: -35px;
 }
 
 .displayList {
-  height: 350px;
-  width: 380px;
-  //background-color: #EF9A9A;
-  background-color: rgba(240,172,172,0.4);
-  //opacity: 0.5;
+  height: 380px;
+  width: 400px;
+  background-color: rgba(90,90,90,0.6);
+  position: relative;
   margin: 20px;
   float: left;
-  color: #FFFFFF;
+  color: #424242;
   padding-top: 30px; 
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 30px;
+  z-index: 1;
+}
+.displayList:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 440px;
+  width: 460px;
+  background-image: url("../img/27_orig.jpg");
+  background-attachment: fixed;
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -ms-filter: blur(10px);
+  -o-filter: blur(10px);
+  filter: blur(10px);
+  z-index: -1;
 }
 
-.blockList {
-  height: 350px;
-  width: 380px;
-  background-color: #EF9A9A;
-  opacity: 0.5;
-  margin: 20px;
-  float: left;
-  padding-top: 30px; 
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 30px;
+.displayItem {
+  height: 250px;
+  width: 330px;
+  margin-top: 10px;
+  margin-left: 18px;
+  background-color: rgba(90,90,90,0.4);
+  overflow-x: hidden;
+  overflow-y: auto;
 }

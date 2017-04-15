@@ -4,14 +4,14 @@ import TodoApp from './TodoApp';
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {red300} from 'material-ui/styles/colors';
+import {grey800} from 'material-ui/styles/colors';
 
 injectTapEventPlugin();
 
 const muiTheme = getMuiTheme({
   palette: {
-    textColor: red300,
-    primary1Color: red300,
+    textColor: grey800,
+    primary1Color: grey800,
   },
 });
 
