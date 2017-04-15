@@ -97,6 +97,7 @@ input {
   height: 440px;
   width: 460px;
   background-image: url("../img/27_orig.jpg");
+  background-size: cover;
   background-attachment: fixed;
   -webkit-filter: blur(10px);
   -moz-filter: blur(10px);
