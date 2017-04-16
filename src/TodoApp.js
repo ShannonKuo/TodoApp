@@ -5,8 +5,7 @@ import TodoList from './TodoList';
 import './App.css';
 
 // material ui
-// import TextField from 'material-ui/TextField';
-// import LinearProgress from 'material-ui/LinearProgress';
+import TextField from 'material-ui/TextField';
 
 class TodoApp extends Component {
   // 一定要有一個 render 方法
@@ -157,7 +156,7 @@ class TodoApp extends Component {
     const elem = document.getElementById('myBar');
     let width = (complete / total) * 100;
     if (complete === 0 && total === 0) {
-      width = 1;
+      width = 0;
     }
     elem.style.width = width + '%';
   }
@@ -168,11 +167,17 @@ class TodoApp extends Component {
       <div className="App">
         <div className="todoAppHeader">
           <h1>TodoApp</h1>
+          <div id="myBar"></div> 
+        </div>
+        <div className="cntItem">
+          <ul>Active item: {this.state.cntTotalItem - this.state.cntComplete}
+              ;  Completed item: {this.state.cntComplete}</ul>
         </div>
         <div className="listInput">
-          <input
+          <TextField
             type="text"
             hintText="Please enter your todo list name"
+            style={{fontSize: 30, width: 500}}
             onChange={this.handleTodoChange}
             onKeyPress={this.handleTodoChange}
             value={this.state.newTodoList.data}
@@ -182,13 +187,6 @@ class TodoApp extends Component {
           >
             <ContentAdd />
           </FloatingActionButton>
-        </div>
-        <div className="cntItem">
-          <ul>Active item: {this.state.cntTotalItem - this.state.cntComplete}
-              ;  Completed item: {this.state.cntComplete}</ul>
-        </div>
-        <div className="progressBar">
-          <div id="myBar"></div>
         </div>
         <ul>
           {this.state.todoLists.map(list =>

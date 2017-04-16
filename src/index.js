@@ -23,7 +23,6 @@ const App = () => (
 
 
 ReactDOM.render(
-  // <TodoApp />,
   <App />,
   document.getElementById('root'),
 );

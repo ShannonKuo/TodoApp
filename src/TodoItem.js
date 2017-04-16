@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 // material ui
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
-// import ActionFavorite from 'material-ui/svg-icons/action/favorite';
-// import ActionFavoriteBorder from '/material-ui/svg-icons/action/favorite-border';
-// import Visibility from 'material-ui/svg-icons/action/visibility-off';
-// import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
 
 const styles = {
   block: {

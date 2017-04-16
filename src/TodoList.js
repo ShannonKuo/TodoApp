@@ -4,7 +4,6 @@ import './App.css';
 // material ui
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-// import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
 
@@ -45,63 +44,55 @@ class TodoList extends Component {
     const listId = this.props.list.listId;
     return (
       <div className="list">
-          {/*{this.props.list.listId !== this.props.changeListName &&
-            <ul>{this.props.list.listName}</ul>
-          }*/}
-          {this.props.changeListName !== listId &&
-            <ul>
-              <div className="listName">
-                {this.props.list.listName}
-                <IconButton
-                  iconClassName="material-icons md-40"
-                  tooltip="delete"
-                  onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
-                >
-                  delete
-                </IconButton>
-                <IconButton
-                  iconClassName="material-icons md-40"
-                  tooltip="edit"
-                  onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
-                >edit 
-                </IconButton>
-              </div>
-            </ul>
-          }
-          {this.props.changeListName === listId &&
-            <ul>  
-              <div className="listName">
-                <TextField
-                  hintText="edit your todo list name"
-                  type="text"
-                  onChange={(evt) => { this.props.handleChangeTodoListName(evt); }}
-                  onKeyPress={(evt) => { this.handlePressEnter(evt, listId, 'edit'); }}
-                />
-                <IconButton
-                  iconClassName="material-icons md-40"
-                  tooltip="delete"
-                  onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
-                >delete
-                </IconButton>
-                <IconButton
-                  iconClassName="material-icons md-40"
-                  tooltip="done"
-                  onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
-                  >done
-                </IconButton>
-              </div>
-            </ul>
-          }
-          {/* <input
-          type="text"
-          value={this.state.newTodoItem.data}
-          onChange={this.handleTodoChange}
-          class="inline"
-        /> */}
+        {this.props.changeListName !== listId &&
+          <ul>
+            <div className="listName">
+              {this.props.list.listName}
+              <IconButton
+                iconClassName="material-icons md-40"
+                tooltip="delete"
+                onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
+              >
+                delete
+              </IconButton>
+              <IconButton
+                iconClassName="material-icons md-40"
+                tooltip="edit"
+                onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
+              >edit 
+              </IconButton>
+            </div>
+          </ul>
+        }
+        {this.props.changeListName === listId &&
+          <ul>  
+            <div className="listName">
+              <TextField
+                hintText="edit your todo list name"
+                type="text"
+                onChange={(evt) => { this.props.handleChangeTodoListName(evt); }}
+                onKeyPress={(evt) => { this.handlePressEnter(evt, listId, 'edit'); }}
+              />
+              <IconButton
+                iconClassName="material-icons md-40"
+                tooltip="delete"
+                onTouchTap={(evt) => { this.props.handleDeleteList(evt, listId); }}
+              >delete
+              </IconButton>
+              <IconButton
+                iconClassName="material-icons md-40"
+                tooltip="done"
+                onTouchTap={(evt) => { this.props.handleEditTodoListName(evt, listId); }}
+                >done
+              </IconButton>
+            </div>
+          </ul>
+        }
         <div className="itemInput">
           <TextField
             hintText="Please enter your todo item"
             type="text"
+            style={{fontSize:20}}
             value={this.state.newTodoItem.data}
             onChange={this.handleTodoChange}
             onKeyPress={(evt) => { this.handlePressEnter(evt, listId, 'add'); }}
